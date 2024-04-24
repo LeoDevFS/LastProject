@@ -1,30 +1,19 @@
-
-
+import Home from './pages/Home'
+// import CountHome from './pages/CountHome.jsx'
+// import Login from './pages/Login'
+// import UserHome from './pages/UserHome'
+// import VipHome from './pages/VipHome'
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router,Route,Routes,Link } from 'react-router-dom';
-import Home from './pages/Home';
+//import Home from './pages/Home';
+import useFetch from './hooks/useFetch';
 
 import './App.css'
 
 function App() {
   
- const [data,setData]= useState(null)
- const urlApi = 'http://localhost:3000'
-
- const fetchData = async () =>{
-  try {
-    const response = await fetch(urlApi)
-    const resData = await response.json()
-    setData(resData)
-    
-  } catch (error) {
-    console.log(error)
-  }
- }
-
- useEffect(()=>{
-  fetchData()
- },[])
+const [urlApi,setUrlApi]=useState('http://localhost:3000')
+const data = useFetch(urlApi)
 
   return (
     <>

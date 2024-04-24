@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 
-export default function useFetch(url) {
-    const [data,setData]=useState(null)
-    const [loading,setLoading]=useState(false)
-    const [error,setError]=useState(null)
+import { useEffect, useState } from 'react';
 
+const useFetch = (url) => {//pasamos parametros cual props
+    const [data, setData] = useState(null);
 
-    useEffect(()=>{
-        setLoading(true)
-        axios.get(url)
-        .then((res)=>{
-            setData(res.data)
-        }).catch((error)=>{
-            setError(error)
-        }).finally(()=>{ //necesitamos el loading en false resuelva lo que resuelva
-            setLoading(false)
-        })
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(url);
+                const dataJson = await response.json();
+                setData(dataJson);
+            } catch (error) {
+                console.log( error);
+            }
+        };
 
-    }),[url]
+        fetchData();//EJECUTAR PARA QUE NO SE QUEDE CARGANDO
 
-    return{
-        data,
-        loading,
-        error
-    }
-}
+        return () => {
+            setData(null);
+        };
+    }, [url]);
+
+    return data;
+};
+
+export default useFetch;
+
