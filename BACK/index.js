@@ -4,8 +4,9 @@ const express = require('express')
 const App = express()
 const dbConnection = require('./config/config')
 const routes = require('./routes/routes')
+const cors = require('cors')
 
-
+App.use(cors())
 const PORT = process.env.PORT || 3000
 
 App.listen(PORT,()=>{
