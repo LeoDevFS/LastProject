@@ -9,6 +9,8 @@ const Home = ({data}) => {
           <Link to={`/id/${item._id}`}>{item.title}</Link>
         </li>
       ))}
+      
+      
     </ul>
     </>
   )
