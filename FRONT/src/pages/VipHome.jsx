@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import { Link } from 'react-router-dom'
-import { DataContext } from '../contexts/DataContext'
+
 import { useDataContext } from '../contexts/DataContext'
 
 function VipHome() {
@@ -16,6 +16,9 @@ function VipHome() {
       data.map(item => (
         <li key={item._id}>
           <p>{item.price}</p>
+          <p>{item.stock}</p>
+          <p>{item.description}</p>
+        
           <Link to={`/id/${item._id}`}>{item.title}</Link>
         </li>
       ))}

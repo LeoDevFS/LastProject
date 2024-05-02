@@ -20,7 +20,7 @@ const useFetch = (url) => {//pasamos parametros cual props
         return () => {
             setData(null);
         };
-    }, [url]);
+    }, []);
 
     return data;
 };

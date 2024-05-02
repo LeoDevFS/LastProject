@@ -6,7 +6,7 @@ import { useDataContext } from '../contexts/DataContext'
 
 function Home() {
 
-  const data = useDataContext()
+  const data = useContext(DataContext)
   
   return (
     <>
