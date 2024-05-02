@@ -6,24 +6,29 @@ import VipHome from './pages/VipHome'
 import ProductDetail from './pages/ProductDetail.jsx'
 
 
-import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { useContext } from 'react'
 
-import useFetch from './hooks/useFetch';
+import {DataContextProvider} from './contexts/DataContext.jsx'
+import { DataContext } from './contexts/DataContext.jsx'
+
+
+
 
 import './App.css'
 
 
-function App() {
 
-  const [urlApi, setUrlApi] = useState('http://localhost:3000')
-  const data = useFetch(urlApi)
+ function  App() {
+  const data =  useContext(DataContext)
+
 
   return (
     <>
+    <DataContextProvider>
       <Router>
         <div>
-          <nav>
+          <nav> 
             <Link to='/'> HOME </Link>
             {/* <Link to='/create'>Create</Link> */}
             <Link to='/login'> Login </Link>
@@ -31,19 +36,18 @@ function App() {
             <Link to='/UserHome'>Comercial  </Link>
             <Link to='/VipHome'>Admin </Link>
           </nav>
-          {
-            data === null ? (<div>loading...</div>) :
+          
               <Routes>
-                <Route path='/' element={<Home data={data} />} />
+                <Route path='/' element={<Home  />} />
                 <Route path='/login' element={<Login data={data} />} />
                 <Route path='/CountHome' element={<CountHome data={data} />} />
                 <Route path='/UserHome' element={<UserHome data={data} />} />
                 <Route path='/VipHome' element={<VipHome data={data} />} />
                 <Route path={`/id/:_id`} element={<ProductDetail data={data} />} />
               </Routes>
-          }
         </div>
       </Router>
+      </DataContextProvider>
     </>
   )
 }

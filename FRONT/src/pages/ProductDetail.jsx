@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { DataContext } from '../contexts/DataContext'
 
 
-function ProductDetail({data}) {
+function ProductDetail() {
+  const data = useContext(DataContext)
     const {_id} = useParams()
 
     const datafiltered = data.filter(item=>item._id == _id)
@@ -10,11 +13,12 @@ function ProductDetail({data}) {
 
   return (
     <>
-    <h1> details </h1>
-        {datafiltered.map(item=>(
+   
+        {  data === null ? (<div>loading...</div>) :
+        datafiltered.map(item=>(
             <h2 key={item._id}>{item.title}</h2>
         ))}
-        <p>falta eso</p>
+        
     
     </>
   )
