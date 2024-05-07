@@ -5,7 +5,7 @@ export const DataContext = createContext()
 
 export function DataContextProvider ({ children }){
 
-    const [urlApi, setUrlApi] = useState('http://localhost:3000')
+    const [urlApi, setUrlApi] = useState('http://localhost:5000')
 
     const data = useFetch(urlApi)
     
